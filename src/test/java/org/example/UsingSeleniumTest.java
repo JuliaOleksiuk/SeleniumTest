@@ -1,9 +1,12 @@
+package org.example;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -40,6 +43,12 @@ public class UsingSeleniumTest {
     }
 
     @Test
+    @Disabled
+    public void testThatShouldBeSkipped() {
+        // some test code
+    }
+
+    @Test
     public void testThatShouldFail() {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
@@ -58,6 +67,17 @@ public class UsingSeleniumTest {
         String value = message.getText();
         assertEquals("some wrong message!", value);
 
+    }
+
+    @Test
+    public void testThatCausesError() {
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+
+        // Attempt to interact with a WebElement that doesn't exist, causing a NullPointerException
+        WebElement nullElement = null;
+        nullElement.click(); // This line will throw a NullPointerException
     }
 
     @AfterEach
